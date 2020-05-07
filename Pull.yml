@@ -1,0 +1,202 @@
+##########################################################
+#                                                        #
+#                  Application Overview                  #
+#                                                        #
+##########################################################
+
+#required
+app_name: Demo_App                 
+
+#required
+app_description: >
+    <Application Description and Wiki Link if you have one>
+
+#required	
+organization: <Cerner Organization e.g. CloudAppDev>
+
+# app_icon will be used with application access. If you want us to configure one plese
+# provide a link to the UI Jira that has the icons attached to it.
+
+#required
+app_icon: <Application Icon for App Access>
+
+app_csi: <anylink>
+reference_pages: <anylink> # Link to your wiki # \
+release_notes: <anylink> # Link to your release notes
+# This is the target Production Deployment
+
+#required
+target_initial_deployment: <yyyy-mm-dd>
+
+#required
+app_owners:
+  # Individuals that can be contacted for support - you may want to include a team DL
+    
+    #required
+  - name: <Name>
+    email: <Email>
+
+#required
+deployment_notifications:
+  # DL or Microsoft Teams Channel email (preferred). This will be used to post pipeline status notifications.
+  
+    #required
+  - name: <Name>
+  
+    #required
+    email: <Email>
+
+alert_notifications:
+  # DL or Microsoft Teams Channel email. This will be used to send notifications such as splunk or new relic alerts.
+  - name: <Name>
+    email: <Email>
+
+app_verifiers:
+  # These are individuals who will be able to verify your deployments when deploying to Sandbox and Production. Please list out several people from your team, these may be engineers or testers who are able to verify before the traffic is flipped to the new container.
+  - name: <Name>
+    email: <Email>
+
+##########################################################
+#                                                        #
+#                 Application Artifacts                  #
+#                                                        #
+##########################################################
+
+#required
+source_repo: https://github.cerner.com/<org>/<repo>
+
+#required
+jenkins: https://jenkins.cerner.com/ion/job/<TODO>/job/<TODO>
+
+#required
+image: docker.cernerrepos.net/<org>/<image>
+
+##########################################################
+#                                                        #
+#                        Operations                      #
+#                                                        #
+##########################################################
+
+#required
+jira: https://jira2.cerner.com/browse/...
+
+#required
+new_relic_app_name: <AppName>
+
+#required
+swx_support_queue: <SWx Support Queue>
+
+#required
+xmatters_group: <xMatters Group Name>
+
+operations_xmatters_group: <operations_xmatters_group Group Name>
+# If you do not have a splunk index we will use the ORION splunk index
+
+#required
+splunk_indexes:
+
+  #required
+  dev: app_corp_orion 
+  
+  #required
+  staging: app_npasp_orion
+  
+  #required
+  certification: app_npasp_orion 
+  
+  #required
+  sandbox: app_npasp_orion
+
+  prod_us: app_asp_orion 
+  prod_eu: app_uksp_orion
+  prod_au: app_au_orion 
+  prod_ca: app_ca_orion
+  prod_gov: app_hacas_mplus_orion
+
+##########################################################
+#                                                        #
+#                    Access & Security                   #
+#                                                        #
+##########################################################
+
+#required
+app_ids:
+  # These are the application ids of the android, ios, and web for use in Application Access
+  # Examples include: com.cernerpowerchart.ambulatory, com.cernermediaservices.video
+  
+  #required
+  dev: ["<Application Access ID>"]
+  
+  #required
+  staging: ["<Application Access ID>"]
+  
+  #required
+  certification: ["<Application Access ID>"]
+  
+  #required
+  sandbox: ["<Application Access ID>"]
+  
+  #required
+  prod_us: ["<Application Access ID>"]
+  
+  #required
+  prod_eu: ["<Application Access ID>"]
+  
+  #required
+  prod_au: ["<Application Access ID>"]
+  
+#required  
+system_accounts:
+  # These will be provided for new applications so you can leave empty
+  # If you already have system accounts you need to provide administrator access to
+  # Arjun Sohaney, Shane Van Hook and Greg Howdeshell
+  # SV9363, AS025911, GH7199
+  
+  #required
+  dev: https://associates.sandboxcernercentral.com/system-accounts/all/<key>
+  
+  #required
+  staging: https://associates.sandboxcernercentral.com/system-accounts/all/<key>
+  
+  #required
+  certification: https://associates.sandboxcernercentral.com/system-accounts/all/<key>
+  
+  #required
+  sandbox: https://associates.sandboxcernercentral.com/system-accounts/all/<key>
+
+  prod_us: https://associates.cernercentral.com/system-accounts/all/<key>
+  prod_eu: https://associates.eu.cernercentral.com/system-accounts/all/<key>
+  prod_au: https://associates.au.cernercentral.com/system-accounts/all/<key>
+
+##########################################################
+#                                                        #
+#                        Deployment                      #
+#                                                        #
+##########################################################
+# Regions to deploy your prod app to.
+# eg. ['us', 'au', 'eu', 'ca', 'gov_us', 'emea2']
+regions: ["AnyRegion"]
+domain : ["AnyDomain"]
+
+#required
+health_resource: meta/availability<required>
+
+# Task to be completed before every deployment
+# eg. ['dbmigrate', 'audit_registration']
+pre_deployment_tasks: ["Tasks"]
+session_store: mysql 
+memory_requirements: 512mb 
+expected_load: 50/sec 
+
+# Root for path based deployments e.g. applications.*cerner.com/<basePath>
+basePath: <basePath>
+
+# Links to the new relic alerts config folder for the app. Leave blank for the Orion team.
+# eg
+# new_relic_alerts: https://github.cerner.com/ion-server-core/ion-platform-newrelic-terraform/tree/master/applications/IonShellServer
+new_relic_alerts: <link>
+
+# Links to the splunk alerts config folder for the app. Leave blank for the Orion team.
+# eg
+# splunk_alerts: https://github.cerner.com/ion/ion-splunk/blob/master/alerts/bandu_app_server_errors.yml
+splunk_alerts: <link>
